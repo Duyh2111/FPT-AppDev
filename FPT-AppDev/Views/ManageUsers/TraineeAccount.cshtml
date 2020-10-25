@@ -1,9 +1,9 @@
-﻿@model FPT_AppDev.ViewModels.AccountViewModel
+﻿@model FPT_AppDev.ViewModels.Users_In_Role
 @{
   ViewBag.Title = "TraineeAccount";
 }
 
-@if (Request.IsAuthenticated && User.IsInRole("Staff") || User.IsInRole("Trainee") || User.IsInRole("Admin"))
+@if (Request.IsAuthenticated && User.IsInRole("Staff") || User.IsInRole("Trainee"))
 {
   <h3>Trainee</h3>
   <table class="table table-striped">

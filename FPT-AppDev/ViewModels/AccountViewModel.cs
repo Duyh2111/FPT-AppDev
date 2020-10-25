@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,4 +17,4 @@ namespace FPT_AppDev.ViewModels
     public AccountViewModel SingleTrainee { get; set; }
     public List<AccountViewModel> Staff { get; set; }
   }
-}
+}*/

@@ -23,13 +23,11 @@
               <ul class="nav navbar-nav">
                 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                 {
-                  <li>@Html.ActionLink("Manage Account", "StaffAccount", "AccountViewModels")</li>
-                  <li>@Html.ActionLink("Create a New Account", "Register", "Account")</li>
-
+                  <li>@Html.ActionLink("Manage Account", "UsersWithRoles", "ManageUsers")</li>
                 }
                 @if (Request.IsAuthenticated && User.IsInRole("Staff"))
                 {
-                  <li>@Html.ActionLink("Manage Account", "TrainerTraineeAccount", "AccountViewModels")</li>
+                  <li>@Html.ActionLink("Manage Account", "TrainerTraineeAccount", "ManageUsers")</li>
                   <li>@Html.ActionLink("Manage Category", "Index", "Categories")</li>
                   <li>@Html.ActionLink("Manage Topic", "Index", "Topics")</li>
                   <li>@Html.ActionLink("Manage Course", "Index", "Courses")</li>
@@ -38,12 +36,12 @@
                 }
                 @if (Request.IsAuthenticated && User.IsInRole("Trainee"))
                 {
-                  <li>@Html.ActionLink("My Account", "TraineeAccount", "AccountViewModels")</li>
+                  <li>@Html.ActionLink("My Account", "TraineeAccount", "ManageUsers")</li>
                   <li>@Html.ActionLink("Courses", "Index", "TraineeCourses")</li>
                 }
                 @if (Request.IsAuthenticated && User.IsInRole("Trainer"))
                 {
-                  <li>@Html.ActionLink("My Account", "TrainerAccount", "AccountViewModels")</li>
+                  <li>@Html.ActionLink("My Account", "TrainerAccount", "ManageUsers")</li>
                   <li>@Html.ActionLink("Topics", "Index", "TrainerTopics")</li>
                 }
               </ul>

@@ -169,11 +169,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AccountViewModelsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManageUsersController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\TopicsController.cs" />
     <Compile Include="Controllers\TraineeCoursesController.cs" />
@@ -204,6 +204,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\Users_In_Role.cs" />
     <Compile Include="ViewModels\CourseViewModel.cs" />
     <Compile Include="ViewModels\TraineeCourseViewModel.cs" />
     <Compile Include="ViewModels\TrainerTopicViewModel.cs" />
@@ -270,10 +271,6 @@
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Delete.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\AccountViewModels\StaffAccount.cshtml" />
-    <Content Include="Views\AccountViewModels\TrainerTraineeAccount.cshtml" />
-    <Content Include="Views\AccountViewModels\TrainerAccount.cshtml" />
-    <Content Include="Views\AccountViewModels\TraineeAccount.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Courses\Delete.cshtml" />
@@ -287,6 +284,12 @@
     <Content Include="Views\TraineeCourses\Create.cshtml" />
     <Content Include="Views\TrainerTopics\Index.cshtml" />
     <Content Include="Views\TrainerTopics\Create.cshtml" />
+    <Content Include="Views\ManageUsers\UsersWithRoles.cshtml" />
+    <Content Include="Views\ManageUsers\Edit.cshtml" />
+    <Content Include="Views\ManageUsers\Delete.cshtml" />
+    <Content Include="Views\ManageUsers\TrainerTraineeAccount.cshtml" />
+    <Content Include="Views\ManageUsers\TrainerAccount.cshtml" />
+    <Content Include="Views\ManageUsers\TraineeAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,71 +1,45 @@
 ﻿using FPT_AppDev.Models;
 using FPT_AppDev.ViewModels;
 using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace FPT_AppDev.Controllers
 {
-  public class AccountViewModelsController : Controller
+  public class ManageUsersController : Controller
   {
-    // GET: AccountViewModels
-    ApplicationDbContext _context;
-    public AccountViewModelsController()
+    private ApplicationDbContext _context;
+    public ManageUsersController()
     {
       _context = new ApplicationDbContext();
     }
-    [Authorize(Roles = "Admin")]
-    public ActionResult StaffAccount()
+    // GET: ManageUsers
+    public ActionResult UsersWithRoles()
     {
-      {
-        var roleStaff = (from r in _context.Roles
-                         where r.Name.Contains("Staff")
-                         select r)
-                         .FirstOrDefault();
+      var usersWithRoles = (from user in _context.Users
+                            select new
+                            {
+                              UserId = user.Id,
+                              Username = user.UserName,
+                              Emailaddress = user.Email,
+                              Password = user.PasswordHash,
+                              RoleNames = (from userRole in user.Roles
+                                           join role in _context.Roles on userRole.RoleId
+                                           equals role.Id
+                                           select role.Name).ToList()
+                            }).ToList().Select(p => new Users_In_Role()
 
-        var staffs = _context.Users.Where(x => x.Roles
-                        .Select(y => y.RoleId)
-                        .Contains(roleStaff.Id))
-                      .ToList();
+                            {
+                              UserId = p.UserId,
+                              Username = p.Username,
+                              Email = p.Emailaddress,
+                              Role = string.Join(",", p.RoleNames)
+                            });
 
-        var staffVM = staffs.Select(user => new AccountViewModel
-        {
-          Email = user.Email,
-          PhoneNumber = user.PhoneNumber,
-          RoleName = "Staff",
-          UserId = user.Id
-        }).ToList();
-        var roleTrainer = (from r in _context.Roles
-                           where r.Name.Contains("Trainer")
-                           select r)
-                         .FirstOrDefault();
 
-        var trainers = _context.Users
-          .Where(x => x.Roles
-          .Select(y => y.RoleId)
-          .Contains(roleTrainer.Id))
-          .ToList();
-        var trainerVM = trainers.Select(user => new AccountViewModel
-        {
-          Email = user.Email,
-          RoleName = "Trainer",
-          UserId = user.Id
-        }).ToList();
-
-        var model = new AccountViewModel
-        {
-          Staff = staffVM,
-          Trainer = trainerVM
-        };
-
-        return View(model);
-      }
+      return View(usersWithRoles);
     }
-
     public ActionResult TrainerTraineeAccount()
     {
       var roleTrainer = (from r in _context.Roles
@@ -78,7 +52,7 @@ namespace FPT_AppDev.Controllers
         .Select(y => y.RoleId)
         .Contains(roleTrainer.Id))
         .ToList();
-      var trainerVM = trainers.Select(user => new AccountViewModel
+      var trainerVM = trainers.Select(user => new Users_In_Role
       {
         Email = user.Email,
         RoleName = "Trainer",
@@ -95,14 +69,13 @@ namespace FPT_AppDev.Controllers
         .Contains(roleTrainee.Id))
         .ToList();
 
-      var traineeVM = trainees.Select(user => new AccountViewModel
+      var traineeVM = trainees.Select(user => new Users_In_Role
       {
         Email = user.Email,
-        PhoneNumber = user.PhoneNumber,
         RoleName = "Trainee",
         UserId = user.Id
       }).ToList();
-      var account = new AccountViewModel
+      var account = new Users_In_Role
       {
         Trainer = trainerVM,
         Trainee = traineeVM
@@ -127,15 +100,14 @@ namespace FPT_AppDev.Controllers
         .GetUserId())
         .SingleOrDefault();
 
-      var trainerVM = new AccountViewModel
+      var trainerVM = new Users_In_Role
       {
         Email = trainer.Email,
-        PhoneNumber = trainer.PhoneNumber,
         RoleName = "Trainer",
         UserId = trainer.Id
       };
 
-      var account = new AccountViewModel
+      var account = new Users_In_Role
       {
         SingleTrainer = trainerVM,
       };
@@ -159,22 +131,22 @@ namespace FPT_AppDev.Controllers
         .GetUserId())
         .SingleOrDefault();
 
-      var traineeVM = new AccountViewModel
+      var traineeVM = new Users_In_Role
       {
         Email = trainee.Email,
-        PhoneNumber = trainee.PhoneNumber,
         RoleName = "Trainee",
         UserId = trainee.Id
       };
 
-      var account = new AccountViewModel
+      var account = new Users_In_Role
       {
         SingleTrainee = traineeVM,
       };
       return View(account);
     }
+
     [HttpGet]
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Staff")]
     public ActionResult Edit(string id)
     {
       if (id == null)
@@ -190,8 +162,34 @@ namespace FPT_AppDev.Controllers
     }
 
     [HttpPost]
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Staff")]
     public ActionResult Edit(ApplicationUser user)
+    {
+      var userInDb = _context.Users.Find(user.Id);
+
+      if (userInDb == null)
+      {
+        return View(user);
+      }
+
+      if (ModelState.IsValid)
+      {
+        userInDb.UserName = user.UserName;
+        userInDb.Phone = user.Phone;
+        userInDb.Email = user.Email;
+
+
+        _context.Users.AddOrUpdate(userInDb);
+        _context.SaveChanges();
+
+        return RedirectToAction("UsersWithRoles");
+      }
+      return View(user);
+
+    }
+
+    [Authorize(Roles = "Admin, Staff")]
+    public ActionResult Delete(ApplicationUser user)
     {
       var userInDb = _context.Users.Find(user.Id);
 
@@ -207,14 +205,12 @@ namespace FPT_AppDev.Controllers
         userInDb.Phone = user.Phone;
         userInDb.Email = user.Email;
 
-
-        _context.Users.AddOrUpdate(userInDb);
+        _context.Users.Remove(userInDb);
         _context.SaveChanges();
 
-        return RedirectToAction("AccountViewModels");
+        return RedirectToAction("UsersWithRoles");
       }
       return View(user);
-
     }
   }
 }

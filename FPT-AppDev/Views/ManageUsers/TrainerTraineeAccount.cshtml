@@ -1,4 +1,4 @@
-﻿@model FPT_AppDev.ViewModels.AccountViewModel
+﻿@model FPT_AppDev.ViewModels.Users_In_Role
 @{
   ViewBag.Title = "TrainerTraineeAccount";
 }
@@ -6,7 +6,7 @@
 <p>
   @Html.ActionLink("Create a new account", "Register", "Account")
 </p>
-@if (Request.IsAuthenticated && User.IsInRole("Staff") || User.IsInRole("Trainer") || User.IsInRole("Admin"))
+@if (Request.IsAuthenticated && User.IsInRole("Staff") || User.IsInRole("Trainer"))
 {
   <h3>Trainer</h3>
   <table class="table">
@@ -40,6 +40,9 @@
         <td> @user.Email</td>
         <td> @user.RoleName</td>
 
+          <td>@Html.ActionLink("Edit", "Edit", new { id = user.UserId })</td>
+          <td>@Html.ActionLink("Delete", "Delete", new { id = user.UserId })</td>
+        
       </tr>
     }
   </table>
