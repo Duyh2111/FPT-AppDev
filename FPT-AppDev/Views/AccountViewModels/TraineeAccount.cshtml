@@ -1,0 +1,25 @@
+﻿@model FPT_AppDev.ViewModels.AccountViewModel
+@{
+  ViewBag.Title = "TraineeAccount";
+}
+
+@if (Request.IsAuthenticated && User.IsInRole("Staff") || User.IsInRole("Trainee") || User.IsInRole("Admin"))
+{
+  <h3>Trainee</h3>
+  <table class="table table-striped">
+    <tr>
+      <th>Emails</th>
+      <th>Roles</th>
+
+      <th></th>
+    </tr>
+    <tr>
+      <td>
+        @Model.SingleTrainee.Email
+      </td>
+      <td>
+        @Model.SingleTrainee.RoleName
+      </td>
+    </tr>
+  </table>
+}

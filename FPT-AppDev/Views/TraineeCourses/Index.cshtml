@@ -1,0 +1,60 @@
+﻿@model IEnumerable<FPT_AppDev.Models.TraineeCourse>
+
+@{
+  ViewBag.Title = "Index";
+}
+
+
+@if (User.IsInRole("Staff"))
+{
+  <h2>Assign Course to Trainee</h2>
+  <p>
+    @Html.ActionLink("Assign Trainee to Course", "Create")
+  </p>
+
+  <table class="table">
+    <tr>
+      <th>
+        Trainee Name
+      </th>
+
+      <th>
+        Course
+      </th>
+      <th></th>
+    </tr>
+
+    @foreach (var traineeCourse in Model)
+    {
+      <tr>
+        <td>
+          @traineeCourse.Trainee.UserName
+        </td>
+        <td>
+          @traineeCourse.Course.Name
+        </td>
+      </tr>
+    }
+  </table>
+}
+@if (User.IsInRole("Trainee"))
+{
+  <h2>My Course</h2>
+  <table class="table">
+    <tr>
+      <th>
+        Course
+      </th>
+      <th></th>
+    </tr>
+    @foreach (var traineeCourse in Model)
+    {
+      <tr>
+        <td>
+          @traineeCourse.Course.Name
+        </td>
+      </tr>
+    }
+  </table>
+}
+

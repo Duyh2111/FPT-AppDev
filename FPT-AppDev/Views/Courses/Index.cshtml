@@ -1,0 +1,46 @@
+﻿@model IEnumerable<FPT_AppDev.Models.Course>
+@{
+  ViewBag.Title = "Index";
+}
+
+<h2>Courses</h2>
+
+
+@Html.ActionLink("Create a new Course", "Create")
+<hr>
+
+@using (Html.BeginForm("Index", "Courses", FormMethod.Get))
+{
+  <p>
+    Find by name: @Html.TextBox("SearchString")
+    <input type="submit" value="Search" />
+  </p>
+}
+
+<table class="table table-striped">
+  <tr>
+    <th>Id</th>
+    <th>Course Name</th>
+    <th>Description</th>
+    <th>Category</th>
+    <th>Topic</th>
+    <th>Actions</th>
+
+
+  </tr>
+  @foreach (var course in Model)
+  {
+<tr>
+  <td>@course.Id</td>
+  <td>@course.Name</td>
+  <td>@course.Description</td>
+  <td>@course.Category.Name</td>
+  <td>@course.Topic.Name</td>
+
+  <td>
+    @Html.ActionLink("Delete", "Delete", new { id = course.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = course.Id })
+  </td>
+</tr>
+  }
+</table>

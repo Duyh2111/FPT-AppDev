@@ -1,0 +1,39 @@
+﻿@model IEnumerable<FPT_AppDev.Models.Topic>
+
+@{
+  ViewBag.Title = "Index";
+}
+
+<h2>Topic</h2>
+
+<p>
+  @Html.ActionLink("Create a New Topic", "Create")
+</p>
+<table class="table">
+  <tr>
+    <th>
+      Topic Name
+    </th>
+    <th>
+      Description
+    </th>
+    <th></th>
+  </tr>
+
+  @foreach (var topic in Model)
+  {
+    <tr>
+      <td>
+        @topic.Name
+      </td>
+      <td>
+        @topic.Description
+      </td>
+      <td>
+        @Html.ActionLink("Edit", "Edit", new { id = topic.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = topic.Id })
+      </td>
+    </tr>
+  }
+
+</table>

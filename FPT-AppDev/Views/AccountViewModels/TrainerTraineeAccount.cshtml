@@ -1,0 +1,46 @@
+﻿@model FPT_AppDev.ViewModels.AccountViewModel
+@{
+  ViewBag.Title = "TrainerTraineeAccount";
+}
+<h2>Manage Accounts</h2>
+<p>
+  @Html.ActionLink("Create a new account", "Register", "Account")
+</p>
+@if (Request.IsAuthenticated && User.IsInRole("Staff") || User.IsInRole("Trainer") || User.IsInRole("Admin"))
+{
+  <h3>Trainer</h3>
+  <table class="table">
+    <tr>
+      <th width="50%">Emails</th>
+      <th>Roles</th>
+      <th></th>
+      <th></th>
+    </tr>
+    @foreach (var user in Model.Trainer)
+    {
+      <tr>
+        <td>@user.Email</td>
+        <td>@user.RoleName</td>
+      </tr>
+    }
+  </table>
+}
+@if (Request.IsAuthenticated && User.IsInRole("Staff"))
+{
+  <h3>Trainee</h3>
+  <table class="table">
+    <tr>
+      <th width="50%">Emails</th>
+      <th>Roles</th>
+      <th></th>
+    </tr>
+    @foreach (var user in Model.Trainee)
+    {
+      <tr>
+        <td> @user.Email</td>
+        <td> @user.RoleName</td>
+
+      </tr>
+    }
+  </table>
+}
