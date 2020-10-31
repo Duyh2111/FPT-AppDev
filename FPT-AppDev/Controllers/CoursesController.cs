@@ -60,7 +60,13 @@ namespace FPT_AppDev.Controllers
       if (_context.Courses.Any(c => c.Name.Contains(course.Name)))
       {
         ModelState.AddModelError("Name", "Course Name Already Exists.");
-        return View();
+        var viewModel = new CourseViewModel
+        {
+          Categories = _context.Categories,
+          Topics = _context.Topics
+        .ToList()
+        };
+        return View(viewModel);
       }
 
       var newCourse = new Course

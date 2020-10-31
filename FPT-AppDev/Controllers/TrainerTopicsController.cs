@@ -84,6 +84,17 @@ namespace FPT_AppDev.Controllers
         return View();
       }
 
+      var trainerTopics = _context.TrainerTopics.ToList();
+      var topicId = model.TrainerTopic.TopicId;
+
+      var checkTrainerInTopic = trainerTopics
+        .SingleOrDefault(c => c.TopicId == topicId && c.TrainerId == model.TrainerTopic.TrainerId);
+
+      if (checkTrainerInTopic != null)
+      {
+        return RedirectToAction("Create");
+      }
+
       var TrainerTopicVM = new TrainerTopicViewModel()
       {
         Topics = topics,

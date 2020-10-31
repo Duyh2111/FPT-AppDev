@@ -7,13 +7,13 @@ namespace FPT_AppDev.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class CopyFPTEducationProjectToFPTAppDev : IMigrationMetadata
+    public sealed partial class updatedatabase : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CopyFPTEducationProjectToFPTAppDev));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updatedatabase));
         
         string IMigrationMetadata.Id
         {
-            get { return "202010250710188_CopyFPT-EducationProjectToFPT-AppDev"; }
+            get { return "202010301929354_updatedatabase"; }
         }
         
         string IMigrationMetadata.Source

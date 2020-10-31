@@ -12,8 +12,7 @@ namespace FPT_AppDev.ViewModels
     public string RoleName { get; set; }
     public List<Users_In_Role> Trainee { get; set; }
     public List<Users_In_Role> Trainer { get; set; }
-    public Users_In_Role SingleTrainer { get; set; }
-    public Users_In_Role SingleTrainee { get; set; }
     public List<Users_In_Role> Staff { get; set; }
+    
   }
 }

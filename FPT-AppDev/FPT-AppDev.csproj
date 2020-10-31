@@ -174,7 +174,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManageUsersController.cs" />
+    <Compile Include="Controllers\ProfileTraineeController.cs" />
+    <Compile Include="Controllers\ProfileTrainerController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\TopicsController.cs" />
     <Compile Include="Controllers\TraineeCoursesController.cs" />
     <Compile Include="Controllers\TrainerTopicsController.cs" />
@@ -182,13 +185,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202010250631255_addRole.cs" />
-    <Compile Include="Migrations\202010250631255_addRole.Designer.cs">
-      <DependentUpon>202010250631255_addRole.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010250710188_CopyFPT-EducationProjectToFPT-AppDev.cs" />
-    <Compile Include="Migrations\202010250710188_CopyFPT-EducationProjectToFPT-AppDev.designer.cs">
-      <DependentUpon>202010250710188_CopyFPT-EducationProjectToFPT-AppDev.cs</DependentUpon>
+    <Compile Include="Migrations\202010301929354_updatedatabase.cs" />
+    <Compile Include="Migrations\202010301929354_updatedatabase.designer.cs">
+      <DependentUpon>202010301929354_updatedatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -204,6 +203,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\ProfileTraineeTrainerViewModel.cs" />
     <Compile Include="ViewModels\Users_In_Role.cs" />
     <Compile Include="ViewModels\CourseViewModel.cs" />
     <Compile Include="ViewModels\TraineeCourseViewModel.cs" />
@@ -284,12 +284,16 @@
     <Content Include="Views\TraineeCourses\Create.cshtml" />
     <Content Include="Views\TrainerTopics\Index.cshtml" />
     <Content Include="Views\TrainerTopics\Create.cshtml" />
+    <Content Include="Views\Staff\Index.cshtml" />
+    <Content Include="Views\Staff\Edit.cshtml" />
+    <Content Include="Views\ProfileTrainee\Index.cshtml" />
+    <Content Include="Views\Admin\UsersWithRoles.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\Delete.cshtml" />
+    <Content Include="Views\ProfileTrainer\Index.cshtml" />
     <Content Include="Views\ManageUsers\UsersWithRoles.cshtml" />
     <Content Include="Views\ManageUsers\Edit.cshtml" />
     <Content Include="Views\ManageUsers\Delete.cshtml" />
-    <Content Include="Views\ManageUsers\TrainerTraineeAccount.cshtml" />
-    <Content Include="Views\ManageUsers\TrainerAccount.cshtml" />
-    <Content Include="Views\ManageUsers\TraineeAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -308,11 +312,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202010250631255_addRole.resx">
-      <DependentUpon>202010250631255_addRole.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010250710188_CopyFPT-EducationProjectToFPT-AppDev.resx">
-      <DependentUpon>202010250710188_CopyFPT-EducationProjectToFPT-AppDev.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202010301929354_updatedatabase.resx">
+      <DependentUpon>202010301929354_updatedatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,6 +1,6 @@
-﻿@model FPT_AppDev.ViewModels.Users_In_Role
+﻿@model FPT_AppDev.ViewModels.ProfileTraineeTrainerViewModel
 @{
-  ViewBag.Title = "TraineeAccount";
+  ViewBag.Title = "Index";
 }
 
 @if (Request.IsAuthenticated && User.IsInRole("Staff") || User.IsInRole("Trainee"))

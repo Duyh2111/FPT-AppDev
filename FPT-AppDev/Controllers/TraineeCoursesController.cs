@@ -80,6 +80,17 @@ namespace FPT_AppDev.Controllers
         return View();
       }
 
+      var traineeCourses = _context.TraineeCourses.ToList();
+      var courseId = model.TraineeCourse.CourseId;
+
+      var checkTraineeInCourse = traineeCourses
+        .SingleOrDefault(c => c.CourseId == courseId && c.TraineeId == model.TraineeCourse.TraineeId);
+
+      if (checkTraineeInCourse != null)
+      {
+        return RedirectToAction("Create");
+      }
+
       var traineeCourse = new TraineeCourseViewModel()
       {
         Courses = courses,
