@@ -21,15 +21,13 @@ namespace FPT_AppDev.Controllers
     public ActionResult Index(string searchString)
     {
       var courses = _context.Courses
-      .Include(c => c.Topic)
       .Include(c => c.Category);
 
       if (!String.IsNullOrEmpty(searchString))
       {
         courses = courses.Where(
           s => s.Name.Contains(searchString) ||
-          s.Category.Name.Contains(searchString) ||
-          s.Topic.Name.Contains(searchString));
+          s.Category.Name.Contains(searchString));
       }
 
       return View(courses.ToList());
@@ -42,8 +40,7 @@ namespace FPT_AppDev.Controllers
     {
       var viewModel = new CourseViewModel
       {
-        Categories = _context.Categories,
-        Topics = _context.Topics
+        Categories = _context.Categories
         .ToList()
       };
       return View(viewModel);
@@ -62,8 +59,7 @@ namespace FPT_AppDev.Controllers
         ModelState.AddModelError("Name", "Course Name Already Exists.");
         var viewModel = new CourseViewModel
         {
-          Categories = _context.Categories,
-          Topics = _context.Topics
+          Categories = _context.Categories
         .ToList()
         };
         return View(viewModel);
@@ -74,7 +70,6 @@ namespace FPT_AppDev.Controllers
         Name = course.Name,
         Description = course.Description,
         CategoryId = course.CategoryId,
-        TopicId = course.TopicId
       };
 
       _context.Courses.Add(newCourse);
@@ -114,8 +109,7 @@ namespace FPT_AppDev.Controllers
       var viewModel = new CourseViewModel
       {
         Course = CourseInDb,
-        Categories = _context.Categories,
-        Topics = _context.Topics
+        Categories = _context.Categories
         .ToList()
       };
 
@@ -135,8 +129,7 @@ namespace FPT_AppDev.Controllers
         ModelState.AddModelError("Name", "Course Name Already Exists.");
         var viewModel = new CourseViewModel
         {
-          Categories = _context.Categories,
-          Topics = _context.Topics
+          Categories = _context.Categories
         .ToList()
         };
 
@@ -153,7 +146,6 @@ namespace FPT_AppDev.Controllers
       CourseInDb.Name = course.Name;
       CourseInDb.Description = course.Description;
       CourseInDb.CategoryId = course.CategoryId;
-      CourseInDb.TopicId = course.TopicId;
       _context.SaveChanges();
 
       return RedirectToAction("Index");

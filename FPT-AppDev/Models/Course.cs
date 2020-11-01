@@ -15,7 +15,6 @@ namespace FPT_AppDev.Models
     public string Description { get; set; }
     public int CategoryId { get; set; }
     public Category Category { get; set; }
-    public int TopicId { get; set; }
-    public Topic Topic { get; set; }
+    
   }
 }

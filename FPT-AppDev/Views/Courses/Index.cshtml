@@ -22,7 +22,6 @@
     <th width="10%">Course Name</th>
     <th width="55%">Description</th>
     <th width="10%">Category</th>
-    <th width="10%">Topic</th>
     <th width="15%">Actions</th>
   </tr>
   @foreach (var course in Model)
@@ -31,8 +30,6 @@
       <td>@course.Name</td>
       <td>@course.Description</td>
       <td>@course.Category.Name</td>
-      <td>@course.Topic.Name</td>
-
       <td>
         @Html.ActionLink("Edit", "Edit", new { id = course.Id }) |
         @Html.ActionLink("Delete", "Delete", new { id = course.Id })
@@ -41,3 +38,4 @@
     </tr>
   }
 </table>
+

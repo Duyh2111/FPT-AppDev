@@ -6,9 +6,9 @@ using System.Web;
 
 namespace FPT_AppDev.ViewModels
 {
-  public class CourseViewModel
+  public class TopicCourseViewModel
   {
-    public Course Course { get; set; }
-    public IEnumerable<Category> Categories { get; set; }
+    public Topic Topic { get; set; }
+    public IEnumerable<Course> Courses { get; set; }
   }
 }

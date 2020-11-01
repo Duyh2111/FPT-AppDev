@@ -1,39 +1,41 @@
 ﻿@model IEnumerable<FPT_AppDev.Models.Topic>
-
 @{
   ViewBag.Title = "Index";
 }
 
-<h2>Topic</h2>
+<h2>Topics</h2>
 
-<p>
-  @Html.ActionLink("Create a New Topic", "Create")
-</p>
+
+@Html.ActionLink("Create a new Topic", "Create")
+<hr>
+
+@using (Html.BeginForm("Index", "Topics", FormMethod.Get))
+{
+  <p>
+    Find by name: @Html.TextBox("SearchString")
+    <input type="submit" value="Search" />
+  </p>
+}
+<hr />
 <table class="table table-bordered" style="max-width: 80%; margin: 27px 0px 20px 120px;">
   <tr>
-    <th width="15%">
-      Topic Name
-    </th>
-    <th width="60%">
-      Description
-    </th>
+    <th width="10%">Topic Name</th>
+    <th width="55%">Description</th>
+    <th width="10%">Course</th>
     <th width="15%">Actions</th>
   </tr>
-
   @foreach (var topic in Model)
   {
     <tr>
-      <td>
-        @topic.Name
-      </td>
-      <td>
-        @topic.Description
-      </td>
+      <td>@topic.Name</td>
+      <td>@topic.Description</td>
+      <td>@topic.Course.Name</td>
       <td>
         @Html.ActionLink("Edit", "Edit", new { id = topic.Id }) |
         @Html.ActionLink("Delete", "Delete", new { id = topic.Id })
+
       </td>
     </tr>
   }
-
 </table>
+
