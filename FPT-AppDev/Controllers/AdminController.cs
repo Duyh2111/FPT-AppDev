@@ -6,15 +6,15 @@ using System.Web.Mvc;
 
 namespace FPT_AppDev.Controllers
 {
-  public class ManageUsersController : Controller
+  public class AdminController : Controller
   {
     private ApplicationDbContext _context;
-    public ManageUsersController()
+    public AdminController()
     {
       _context = new ApplicationDbContext();
     }
     // GET: ManageUsers
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public ActionResult UsersWithRoles()
     {
       var usersWithRoles = (from user in _context.Users
@@ -79,6 +79,7 @@ namespace FPT_AppDev.Controllers
 
         return RedirectToAction("UsersWithRoles");
       }
+
       return View(user);
 
     }

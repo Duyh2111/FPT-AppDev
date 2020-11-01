@@ -3,38 +3,38 @@
   ViewBag.Title = "Users With Roles";
 }
 
-<h2>Users with Roles</h2>
+<h3>The Information Of Users</h3>
 
 @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("Staff"))
 {
-  <p class="text-primary m-0 font-weight-bold">
+  <p>
     @Html.ActionLink("New user", "Register", "Account")
-    @*<a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info float-right"><i class="fas fa-plus"></i>&nbsp; New User</a>*@
   </p>
-  <!-- /.box-header -->
 }
 
 <div>
   <table class="table">
     <thead>
       <tr>
-        <td><b>Username</b></td>
-        <td><b>Email</b></td>
-        <td><b>Roles</b></td>
-        <td><b></b></td>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Roles</th>
+        <th>Actions</th>
+        
       </tr>
     </thead>
     @foreach (var user in Model)
     {
       <tr>
+        @if ((user.Role.Contains("Staff") || user.Role.Contains("Trainer")) == true) 
+        {
         <td>@user.Username</td>
         <td>@user.Email</td>
         <td>@user.Role</td>
 
-        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-        {
-          <td>@Html.ActionLink("Edit", "Edit", new { id = user.UserId })</td>
-          <td>@Html.ActionLink("Delete", "Delete", new { id = user.UserId })</td>
+         
+          <td>@Html.ActionLink("Edit", "Edit", new { id = user.UserId }) |
+          @Html.ActionLink("Delete", "Delete", new { id = user.UserId })</td>
         }
 
 

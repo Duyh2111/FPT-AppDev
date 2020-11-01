@@ -90,7 +90,6 @@ namespace FPT_AppDev.Controllers
       if (checkTraineeInCourse != null)
       {
         ModelState.AddModelError("Name", "Trainee Course Already Exists.");
-        //return RedirectToAction("Create");
         var traineeCourse = new TraineeCourseViewModel()
         {
           Courses = courses,

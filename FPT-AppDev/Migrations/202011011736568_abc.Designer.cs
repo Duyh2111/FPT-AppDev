@@ -7,13 +7,13 @@ namespace FPT_AppDev.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class updatedatabase : IMigrationMetadata
+    public sealed partial class abc : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(updatedatabase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(abc));
         
         string IMigrationMetadata.Id
         {
-            get { return "202010301929354_updatedatabase"; }
+            get { return "202011011736568_abc"; }
         }
         
         string IMigrationMetadata.Source
