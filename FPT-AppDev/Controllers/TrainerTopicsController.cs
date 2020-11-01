@@ -39,7 +39,7 @@ namespace FPT_AppDev.Controllers
       return View("Login");
     }
 
-    [Authorize(Roles = "Staff, Trainer")]
+    [Authorize(Roles = "Staff")]
     [HttpGet]
     public ActionResult Create()
     {
@@ -92,15 +92,22 @@ namespace FPT_AppDev.Controllers
 
       if (checkTrainerInTopic != null)
       {
-        return RedirectToAction("Create");
+        ModelState.AddModelError("Name", "Trainer Topic Already Exists.");
+        var TrainerTopicVM = new TrainerTopicViewModel()
+        {
+          Topics = topics,
+          Trainers = users,
+          TrainerTopic = new TrainerTopic()
+        };
+        return View(TrainerTopicVM);
       }
 
-      var TrainerTopicVM = new TrainerTopicViewModel()
+      /*var TrainerTopicVM = new TrainerTopicViewModel()
       {
         Topics = topics,
         Trainers = users,
         TrainerTopic = new TrainerTopic()
-      };
+      };*/
       _context.TrainerTopics.Add(model.TrainerTopic);
       _context.SaveChanges();
       return RedirectToAction("Index");

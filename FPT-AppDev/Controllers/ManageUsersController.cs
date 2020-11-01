@@ -14,6 +14,7 @@ namespace FPT_AppDev.Controllers
       _context = new ApplicationDbContext();
     }
     // GET: ManageUsers
+    [Authorize(Roles ="Admin")]
     public ActionResult UsersWithRoles()
     {
       var usersWithRoles = (from user in _context.Users

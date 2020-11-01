@@ -12,16 +12,15 @@
     @Html.ActionLink("Assign Trainee to Course", "Create")
   </p>
 
-  <table class="table">
+  <table class="table table-bordered" style="max-width: 80%; margin: 27px 0px 20px 120px;">
     <tr>
-      <th>
+      <th width="15%">
         Trainee Name
       </th>
 
-      <th>
+      <th width="15%">
         Course
       </th>
-      <th></th>
     </tr>
 
     @foreach (var traineeCourse in Model)

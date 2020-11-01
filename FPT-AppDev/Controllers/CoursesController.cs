@@ -130,6 +130,19 @@ namespace FPT_AppDev.Controllers
         return View();
       }
 
+      if (_context.Courses.Any(c => c.Name.Contains(course.Name)))
+      {
+        ModelState.AddModelError("Name", "Course Name Already Exists.");
+        var viewModel = new CourseViewModel
+        {
+          Categories = _context.Categories,
+          Topics = _context.Topics
+        .ToList()
+        };
+
+        return View(viewModel);
+      }
+
       var CourseInDb = _context.Courses.SingleOrDefault(c => c.Id == course.Id);
 
       if (CourseInDb == null)

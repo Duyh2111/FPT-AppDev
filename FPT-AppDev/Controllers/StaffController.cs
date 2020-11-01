@@ -17,15 +17,14 @@ namespace FPT_AppDev.Controllers
     [Authorize(Roles = "Staff")]
     public ActionResult Index()
     {
-      // declare the role variable using the function (FROM-IN) to specify the query data source (Roles).
-      // Look in the name column in the Roles table containing "Trainee" and assign it to the variable
-      var role = (from r in _context.Roles where r.Name.Contains("Trainee") select r).FirstOrDefault();
-      // declare variable users with function (FROM-IN) to specify the query data source (Users).
-      //Find the user in the Users table whose "RoleId" was assigned when registering 
-      //containing the "role.Id" selected in the above variable.
-      var users = _context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(role.Id)).ToList();
-      // declare variable userVM to assign the users selected on the variable "users"
-      //to "ManagerStaffViewModel" to display
+      var role = (from r in _context.Roles where r.Name
+                  .Contains("Trainee") select r)
+                  .FirstOrDefault();
+      var users = _context.Users
+        .Where(x => x.Roles
+        .Select(y => y.RoleId)
+        .Contains(role.Id))
+        .ToList();
       var userVM = users.Select(user => new AccountViewModel
       {
         UserName = user.UserName,
@@ -34,15 +33,14 @@ namespace FPT_AppDev.Controllers
         UserId = user.Id
       }).ToList();
 
-      // declare role2 variable using the function (FROM-IN) to specify the query data source (Roles).
-      // Look in the name column in the Roles table containing "Trainer" and assign it to the variable
-      var role2 = (from r in _context.Roles where r.Name.Contains("Trainer") select r).FirstOrDefault();
-      // declare variable admins with function (FROM-IN) to specify the query data source (Users).
-      //Find the user in the Users table whose "RoleId" was assigned when registering 
-      //containing the "role2.Id" selected in the above variable.
-      var users2 = _context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(role2.Id)).ToList();
-      // declare variable adminVM to assign the users selected on the variable "admins"
-      //to "ManagerStaffViewModel" to display
+      var role2 = (from r in _context.Roles where r.Name
+                   .Contains("Trainer") select r)
+                   .FirstOrDefault();
+      var users2 = _context.Users
+        .Where(x => x.Roles
+        .Select(y => y.RoleId)
+        .Contains(role2.Id))
+        .ToList();
       var user2VM = users2.Select(user => new AccountViewModel
       {
         UserName = user.UserName,
@@ -79,10 +77,11 @@ namespace FPT_AppDev.Controllers
       {
         return View();
       }
-      var UsernameIsExist = _context.Users.
-                  Any(p => p.UserName.Contains(user.UserName));
+      var UsernameIsAlreadyExist = _context.Users
+        .Any(p => p.UserName
+        .Contains(user.UserName));
 
-      if (UsernameIsExist)
+      if (UsernameIsAlreadyExist)
       {
         ModelState.AddModelError("UserName", "Username already existed");
         return View();
@@ -93,6 +92,7 @@ namespace FPT_AppDev.Controllers
       if (AccountInDB == null)
       {
         return HttpNotFound();
+
       }
 
       AccountInDB.UserName = user.UserName;

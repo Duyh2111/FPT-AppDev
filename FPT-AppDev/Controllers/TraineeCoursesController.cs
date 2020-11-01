@@ -37,7 +37,7 @@ namespace FPT_AppDev.Controllers
       }
       return View("Login");
     }
-
+    [Authorize(Roles = "Staff")]
     public ActionResult Create()
     {
       var role = (from r in _context.Roles
@@ -62,6 +62,7 @@ namespace FPT_AppDev.Controllers
     }
 
     [HttpPost]
+    [Authorize(Roles = "Staff")]
     public ActionResult Create(TraineeCourseViewModel model)
     {
       var role = (from r in _context.Roles
@@ -88,15 +89,18 @@ namespace FPT_AppDev.Controllers
 
       if (checkTraineeInCourse != null)
       {
-        return RedirectToAction("Create");
+        ModelState.AddModelError("Name", "Trainee Course Already Exists.");
+        //return RedirectToAction("Create");
+        var traineeCourse = new TraineeCourseViewModel()
+        {
+          Courses = courses,
+          Trainees = users,
+          TraineeCourse = new TraineeCourse()
+        };
+        return View(traineeCourse);
       }
 
-      var traineeCourse = new TraineeCourseViewModel()
-      {
-        Courses = courses,
-        Trainees = users,
-        TraineeCourse = new TraineeCourse()
-      };
+
 
       _context.TraineeCourses.Add(model.TraineeCourse);
       _context.SaveChanges();

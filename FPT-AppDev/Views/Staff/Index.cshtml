@@ -9,15 +9,15 @@
     @Html.ActionLink("Create a new account", "Register", "Account")
   </p>
 }
-<h3>Trainee</h3>
+<h3 style="color: dodgerblue">Trainee</h3>
 <div>
   <table class="table">
     <thead>
       <tr>
-        <th>UserName</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Edit</th>
+        <th width="10%">UserName</th>
+        <th width="20%">Email</th>
+        <th width="10%">Role</th>
+        <th width="10%">Edit</th>
       </tr>
     </thead>
     @foreach (var user in Model.Trainee)
@@ -31,15 +31,15 @@
     }
   </table>
 </div>
-<h3>Trainer</h3>
+<h3 style="color: dodgerblue">Trainer</h3>
 <div>
   <table class="table">
     <thead>
       <tr>
-        <th>UserName</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Edit</th>
+        <th width="10%">UserName</th>
+        <th width="20%">Email</th>
+        <th width="10%">Role</th>
+        <th width="10%">Edit</th>
       </tr>
     </thead>
     @foreach (var user in Model.Trainer)

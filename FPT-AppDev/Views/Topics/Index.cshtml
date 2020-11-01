@@ -9,15 +9,15 @@
 <p>
   @Html.ActionLink("Create a New Topic", "Create")
 </p>
-<table class="table">
+<table class="table table-bordered" style="max-width: 80%; margin: 27px 0px 20px 120px;">
   <tr>
-    <th width="20%">
+    <th width="15%">
       Topic Name
     </th>
     <th width="60%">
       Description
     </th>
-    <th></th>
+    <th width="15%">Actions</th>
   </tr>
 
   @foreach (var topic in Model)
