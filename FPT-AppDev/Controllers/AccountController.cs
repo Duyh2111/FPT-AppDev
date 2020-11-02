@@ -157,7 +157,7 @@ namespace FPT_AppDev.Controllers
     //
     // POST: /Account/Register
     [HttpPost]
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin, Staff")]
     [ValidateAntiForgeryToken]
     public async Task<ActionResult> Register(RegisterViewModel model)
     {
