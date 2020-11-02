@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using FPT_AppDev.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace FPT_AppDev.ViewModels
@@ -9,11 +9,9 @@ namespace FPT_AppDev.ViewModels
     [Required]
     public string Username { get; set; }
     public string Email { get; set; }
-    public string Password { get; set; }
     public string Role { get; set; }
     public string RoleName { get; set; }
-    public List<Users_In_Role> Trainer { get; set; }
-    public List<Users_In_Role> Staff { get; set; }
-    
+
+    public ApplicationUser ApplicationUser { get; set; }
   }
 }
