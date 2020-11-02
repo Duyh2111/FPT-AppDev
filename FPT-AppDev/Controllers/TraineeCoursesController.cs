@@ -15,7 +15,7 @@ namespace FPT_AppDev.Controllers
     {
       _context = new ApplicationDbContext();
     }
-
+    [Authorize(Roles = "Staff, Trainee")]
     public ActionResult Index()
     {
       if (User.IsInRole("Staff"))
