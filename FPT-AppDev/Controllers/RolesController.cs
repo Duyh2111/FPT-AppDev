@@ -15,6 +15,7 @@ namespace FPT_AppDev.Controllers
       context = new ApplicationDbContext();
     }
     // GET: Roles
+    [Authorize(Roles = "Admin")]
     public ActionResult Index()
     {
       if (User.Identity.IsAuthenticated)
@@ -34,7 +35,7 @@ namespace FPT_AppDev.Controllers
       var Roles = context.Roles.ToList();
       return View(Roles);
     }
-
+    [Authorize(Roles = "Admin")]
     public Boolean isAdminUser()
     {
       if (User.Identity.IsAuthenticated)
